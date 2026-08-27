@@ -1,0 +1,22 @@
+# UE adapter bundle. The Unreal server remains loopback-only. Override the local
+# endpoint with DSH_UNREAL_MCP_URL when Unreal cannot use the default port.
+- insert:
+    - id: dsh-unreal-mcp
+      name: dsh-unreal-mcp
+      config:
+        endpoint: !!js process.env.DSH_UNREAL_MCP_URL ?? 'http://127.0.0.1:8000/mcp'
+        engineRoot: !!js process.env.DSH_UNREAL_ENGINE_ROOT
+        maxSearchDepth: 64
+    - id: mcp-unreal
+      name: '@deepseek-ai/dsh-mcp-client'
+      config:
+        serverName: unreal
+        transport: streamable-http
+        url: !!js process.env.DSH_UNREAL_MCP_URL ?? 'http://127.0.0.1:8000/mcp'
+        toolCallTimeoutMs: !!js Number(process.env.DSH_UNREAL_MCP_TIMEOUT_MS ?? 60000)
+        failOnStartupError: false
+        reconnect:
+          enabled: true
+          initialDelayMs: 500
+          maxDelayMs: 30000
+          maxAttempts: 10

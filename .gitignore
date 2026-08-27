@@ -1,0 +1,21 @@
+.DS_Store
+.env
+.env.*
+!.env.example
+node_modules/
+dist/
+coverage/
+*.log
+outputs/
+docs/
+CHANGELOG.md
+CONTRIBUTING.md
+
+# Local DeepSeek Harness state and credentials.
+.dsh/
+
+# Unreal projects used by integration tests stay outside this repository.
+Binaries/
+DerivedDataCache/
+Intermediate/
+Saved/
